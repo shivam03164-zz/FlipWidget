@@ -24,16 +24,49 @@ public class MainActivity extends AppWidgetProvider{
       for(int i=0; i<appWidgetIds.length; i++){
       int currentWidgetId = appWidgetIds[i];
       String url = "http://m.flipkart.com";
+      String url2 = "http://m.flipkart.com/search";
+      String url3 = "http://m.flipkart.com/offers";
+      
+      
       Intent intent = new Intent(Intent.ACTION_VIEW);
       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       intent.setData(Uri.parse(url));
-      Log.i("shivam","jaiswal");
-      PendingIntent pending = PendingIntent.getActivity(context, 0,
+      
+      
+      Intent intent2 = new Intent(Intent.ACTION_VIEW);
+      intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      intent2.setData(Uri.parse(url2));
+      
+      Intent intent3 = new Intent(Intent.ACTION_VIEW);
+      intent3.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      intent3.setData(Uri.parse(url3));
+      
+
+      
+      PendingIntent pending1 = PendingIntent.getActivity(context, 0,
       intent, 0);
+      
+      
+      PendingIntent pending2 = PendingIntent.getActivity(context, 0,
+    	      intent2, 0);
+      
+      PendingIntent pending3 = PendingIntent.getActivity(context, 0,
+    	      intent3, 0);
+      
+      
       RemoteViews views = new RemoteViews(context.getPackageName(),
       R.layout.activity_main);
-      views.setOnClickPendingIntent(R.id.flipLogo, pending);
+      
+      
+      views.setOnClickPendingIntent(R.id.flipLogo, pending1);
+      views.setOnClickPendingIntent(R.id.search, pending2);
+      views.setOnClickPendingIntent(R.id.item_button, pending3);
+      
+      
+      
       appWidgetManager.updateAppWidget(currentWidgetId,views);
+      
+      
       Toast.makeText(context, "widget added", Toast.LENGTH_SHORT).show();	
       }
    }	
